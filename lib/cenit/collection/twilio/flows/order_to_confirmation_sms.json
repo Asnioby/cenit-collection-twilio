@@ -1,0 +1,14 @@
+{
+  "name": "Order to Confirmation SMS",
+  "active": true,
+  "discard_events": false,
+  "data_type_scope": "Event source",
+  "event": {
+    "_reference": true,
+    "name": "Ecommerce | Order on created_at"
+  },
+  "translator": {
+    "_reference": true,
+    "name": "Order to Confirmation SMS"
+  }
+}
