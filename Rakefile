@@ -54,7 +54,7 @@ task :create_repo do
 end
 
 desc "push shared collection into CENIT-Hub"
-require File.expand_path(File.join(*%w[ lib cenit collection sample]), File.dirname(__FILE__))
+require File.expand_path(File.join(*%w[ lib cenit collection twilio]), File.dirname(__FILE__))
 task :push do
 
   push_api = 'http://localhost:3000/api/v1/push'
@@ -73,13 +73,13 @@ task :push do
 end
 
 desc "show shared collection"
-require File.expand_path(File.join(*%w[ lib cenit collection sample]), File.dirname(__FILE__))
+require File.expand_path(File.join(*%w[ lib cenit collection twilio]), File.dirname(__FILE__))
 task :show do
   puts Cenit::Collection.show_collection
 end
 
 desc "push sample data"
-require File.expand_path(File.join(*%w[ lib cenit collection sample]), File.dirname(__FILE__))
+require File.expand_path(File.join(*%w[ lib cenit collection twilio]), File.dirname(__FILE__))
 task :push_sample do
   push_api = 'http://localhost:3000/api/v1/push'
 
@@ -93,11 +93,12 @@ task :push_sample do
   config = {:push_url=> push_api, :user_key=> user_key, :user_token=> user_token}
   model = ask("Model name: ")
 
-  Cenit::Collection.push_sample(model, config) unless model.nil? || model.empty?
+  response = Cenit::Collection.push_sample(model, config) unless model.nil? || model.empty?
+  puts response
 end
 
 desc "import json collection source"
-require File.expand_path(File.join(*%w[ lib cenit collection sample]), File.dirname(__FILE__))
+require File.expand_path(File.join(*%w[ lib cenit collection twilio]), File.dirname(__FILE__))
 require 'fileutils'
 task :import do
   begin
